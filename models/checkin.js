@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const checkinSchema = new Schema({
   date: { type: Date, required: true },  
   status: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: 'User' },
-  habit: { type: Schema.Types.ObjectId, ref: 'Habit' },
+  userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  habitId: { type: Schema.Types.ObjectId, ref: 'Habit' },
 });
 
-const Habit = mongoose.model("Habit", habitSchema);
+const Habit = mongoose.model("Checkin", checkinSchema);
 
-module.exports = Habit;
+module.exports = Checkin;

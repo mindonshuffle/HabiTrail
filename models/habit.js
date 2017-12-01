@@ -8,7 +8,7 @@ const habitSchema = new Schema({
   currentChain: { type: Number, default: 0 },
   longestChain: { type: Number, default: 0 },
   goalChain: { type: Number, default: 90 },
-  user: { type: Schema.Types.ObjectId, ref: 'User' },  
+  userId: { type: Schema.Types.ObjectId, ref: 'User' },  
 });
 
 const Habit = mongoose.model("Habit", habitSchema);

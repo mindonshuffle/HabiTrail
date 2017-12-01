@@ -3,6 +3,12 @@ const path = require("path");
 const mongoose = require("mongoose"); 
 const routes = require("./routes");
 const bodyParser = require("body-parser");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session')
+
+// requires the model with Passport-Local Mongoose plugged in
+const User = require('./models/user');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,6 +21,14 @@ if (process.env.NODE_ENV === "production") {
 // Configure body parser for AJAX requests
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// *** *** *** ALERT: CookieParser may cause errors *** verify
+// app.use(express.cookieParser());
+
+// For Passport
+app.use(session({ secret: 'learn every day',resave: true, saveUninitialized:true})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 app.use(routes);
 
