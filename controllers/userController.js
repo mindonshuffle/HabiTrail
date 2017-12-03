@@ -32,6 +32,7 @@ module.exports = {
 
     db.Checkin
       .find({ userId: req.params.id , date: findDate })
+      .populate('habitId')
       .sort({ createdDate: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
