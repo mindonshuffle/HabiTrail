@@ -1,15 +1,15 @@
 const router = require("express").Router();
-const userController = require("../../controllers/userController");
+const checkinController = require("../../controllers/checkinController");
 
-// Matches with "/api/user"
+// Matches with "/api/checkin"
 router.route("/")
-    // .get(userController.find)
-    .post(userController.create);
+    // .get(checkinController.find)
+    .post(checkinController.create);
 
-// // Matches with "/api/user/:id"
+// // Matches with "/api/checkin/:id"
 router.route("/:id")
-    .get(userController.find)
-    .put(userController.update)
-    .delete(userController.remove);
+    .get(checkinController.find)
+    .put(checkinController.update)
+    .delete(checkinController.remove);
 
 module.exports = router;
