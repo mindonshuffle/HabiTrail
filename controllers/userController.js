@@ -28,7 +28,7 @@ module.exports = {
   },
   findCheckinsByDate: function(req, res) {
     
-    findDate = moment.utc(req.params.date, 'YYYYMMDD').toDate();
+    findDate = moment(req.params.date, 'YYYYMMDD').startOf('day').toDate();
 
     db.Checkin
       .find({ userId: req.params.id , date: findDate })

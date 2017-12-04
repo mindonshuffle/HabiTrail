@@ -4,14 +4,15 @@ const moment = require('moment');
 //when new habit is created, habit checkins are created for the next 14 days
 function populateCheckins(habitId, userId){
   // console.log(habitId);
-  let newDate = '';
+  
   for(var i = 0; i < 14; i++){
-    checkinDate = moment.utc().startOf('day').add(i, 'days').toString();
+  
+    const checkinDate = moment().startOf('day').add(i, 'days').toDate();
+    // console.log(checkinDate);
     db.Checkin
       .create({
         habitId: habitId,
         userId: userId,
-        // get today's date, add i days
         date: checkinDate
       })
       .catch(err => res.status(422).json(err));

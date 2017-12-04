@@ -13,8 +13,14 @@ export default {
   },
   getHabits: function(userId){
     return axios.get(`/api/user/${userId}/habit`);
+  },
+  createHabit: function(userId, description, goal){
+    return axios.post('/api/habit', {
+      userId: userId,
+      description: description,
+      goalChain: goal,
+    });
   }
-
 
 
   // Deletes the book with the given id

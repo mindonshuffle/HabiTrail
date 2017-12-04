@@ -15,7 +15,7 @@ import moment from 'moment';
 const styles = theme => ({
   card: {
     minWidth: 275,
-    textAlign: 'center',
+    // textAlign: 'center',
   },
   cardHeader: {
     textAlign: 'left',
@@ -36,20 +36,26 @@ const styles = theme => ({
 class AddHabit extends React.Component {
 
   state = {
+    userId: this.props.userId,
+    description: '',
+    goal: '90',
+  };
 
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
   };
 
   render() {
     const { classes } = this.props;
-    // const confirmClick = () => {
-    //   API.confirmCheckin(props.id)
-    //     .then(props.loadCheckins);
-    // };
-    // const missedClick = () => {
-    //   API.missedCheckin(props.id)
-    //     .then(props.loadCheckins);
-    // };
 
+    const saveClick = () => {
+      console.log(this.state)
+      API.createHabit(this.state.userId, this.state.description, this.state.goal)
+        .then(this.props.loadHabits);
+    };
+    
     return (
       <Grid item xs={12} sm={12} md={6}>
         <Card className={classes.card}>
@@ -57,10 +63,12 @@ class AddHabit extends React.Component {
           <CardHeader title="Add New Habit" classes={{title: classes.title}} className={classes.cardHeader} />
                     
           <CardContent>
-            <Grid container spacing="16" justify="space-between">
+            <Grid container spacing="16" justify="flex-start">
               <Grid item xs="12">
                   <TextField
                       label="Description"
+                      value={this.state.description} 
+                      onChange={this.handleChange('description')} 
                       placeholder="ex: Take morning medicine"
                       className={classes.textField}
                       fullWidth 
@@ -71,20 +79,25 @@ class AddHabit extends React.Component {
               <Grid item xs="12">
                   <TextField
                       label="Goal"
+                      value={this.state.goal} 
+                      onChange={this.handleChange('goal')} 
                       type="number" 
-                      defaultValue="90" 
                       className={classes.textField}
                       margin="normal"
                   />
               </Grid>
     
-              <Grid item xs="6">
-                <Button raised className={classes.button}>
+              <Grid item xs="4">
+                <Button raised className={classes.button} onClick={() => saveClick()}>
                   Save
                 </Button>
               </Grid>
 
-              <Grid item xs="6">
+              <Grid item xs="4">
+                
+              </Grid>
+
+              <Grid item xs="4">
                 <Button raised className={classes.button}>
                   Cancel
                 </Button>

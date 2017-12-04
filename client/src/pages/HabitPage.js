@@ -62,7 +62,9 @@ class HabitPage extends Component {
             }      
 
             <AddHabit 
-                userId={this.state.userId}/>
+                userId={this.state.userId}
+                loadHabits={this.loadHabits}
+            />
           </Grid>     
         </Grid>
     );
