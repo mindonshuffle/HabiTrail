@@ -5,9 +5,10 @@ import './App.css';
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
-import Divider from 'material-ui/Divider';
+// import Divider from 'material-ui/Divider';
 import TopBar from './components/TopBar/TopBar.js';
 import HomePage from './pages/HomePage.js';
+import HabitPage from './pages/HabitPage.js';
 
 const theme = createMuiTheme();
 
@@ -22,8 +23,8 @@ class App extends Component {
             
               <Switch>          
                 <Route exact path="/" component={HomePage} />
-                <Route exact path="/habits" component={HomePage} />
-                <Route exact path="/history" component={HomePage} />
+                <Route exact path="/habits" component={HabitPage} />
+                <Route exact path="/history" component={HabitPage} />
               </Switch>              
         
           </Router>

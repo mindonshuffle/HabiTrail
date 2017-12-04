@@ -5,6 +5,18 @@ export default {
   getCheckins: function(userId, date) {
     return axios.get(`/api/user/${userId}/checkin/${date}`);
   },
+  confirmCheckin: function(checkinId){
+    return axios.put(`/api/checkin/${checkinId}`, {status: 'Completed'});
+  },
+  missedCheckin: function(checkinId){
+    return axios.put(`/api/checkin/${checkinId}`, {status: 'Missed'});
+  },
+  getHabits: function(userId){
+    return axios.get(`/api/user/${userId}/habit`);
+  }
+
+
+
   // Deletes the book with the given id
   // deleteArticle: function(id) {
   //   return axios.delete("/api/articles/" + id);

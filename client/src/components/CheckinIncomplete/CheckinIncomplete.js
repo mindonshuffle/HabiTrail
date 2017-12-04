@@ -8,6 +8,7 @@ import CheckIcon from 'material-ui-icons/Check';
 import CloseIcon from 'material-ui-icons/Close';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
+import API from '../../utils/API.js';
 
 const styles = theme => ({
   card: {
@@ -33,16 +34,21 @@ const styles = theme => ({
 
 function CheckinIncomplete(props) {
   const { classes } = props;
+  const confirmClick = () => {
+    API.confirmCheckin(props.id)
+      .then(props.loadCheckins);
+  };
+  const missedClick = () => {
+    API.missedCheckin(props.id)
+      .then(props.loadCheckins);
+  };
 
   return (
     <Grid item xs={12} sm={12} md={6}>
       <Card className={classes.card}>
         
         <CardHeader title={props.description} classes={{title: classes.title}} className={classes.cardHeader} />
-          {/* <Typography type="display1" color="white" component="h2">
-            {props.description}
-          </Typography> */}
-        
+                  
         <CardContent>
           <Grid container spacing="16" justify="space-between">
             <Grid item xs="3">
@@ -61,12 +67,12 @@ function CheckinIncomplete(props) {
         <CardActions>
           <Grid container spacing="16" justify="space-around">
             <Grid item>
-              <IconButton className={classes.menuButton} color="dark" aria-label="Menu">
+              <IconButton className={classes.menuButton} color="dark" aria-label="Menu" onClick={() => confirmClick()}>
                 <CheckIcon />
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton className={classes.menuButton} color="dark" aria-label="Menu">
+              <IconButton className={classes.menuButton} color="dark" aria-label="Menu" onClick={() => missedClick()}>
                 <CloseIcon />
               </IconButton>
             </Grid>

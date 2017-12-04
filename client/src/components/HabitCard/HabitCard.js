@@ -12,7 +12,6 @@ import API from '../../utils/API.js';
 
 const styles = theme => ({
   card: {
-    opacity: '.65',
     minWidth: 275,
     textAlign: 'center',
   },
@@ -33,7 +32,7 @@ const styles = theme => ({
   },
 });
 
-function CheckinComplete(props) {
+function HabitCard(props) {
   const { classes } = props;
   const confirmClick = () => {
     API.confirmCheckin(props.id)
@@ -85,8 +84,8 @@ function CheckinComplete(props) {
   );
 }
 
-CheckinComplete.propTypes = {
+HabitCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CheckinComplete);
+export default withStyles(styles)(HabitCard);

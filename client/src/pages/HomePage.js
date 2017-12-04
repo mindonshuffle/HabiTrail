@@ -6,8 +6,9 @@ import API from '../utils/API.js';
 
 import Grid from 'material-ui/Grid';
 import Divider from 'material-ui/Divider';
-import TopBar from '../components/TopBar/TopBar.js';
+// import TopBar from '../components/TopBar/TopBar.js';
 import CheckinIncomplete from '../components/CheckinIncomplete/CheckinIncomplete.js';
+import CheckinComplete from '../components/CheckinComplete/CheckinComplete.js';
 
 //temporary constant user
 // const userId = 'a1f16bae5ece1c4dc4de68e'
@@ -51,10 +52,13 @@ class HomePage extends Component {
             {
               this.state.pendingCheckins.map(checkin => {
                 return (
-                    <CheckinIncomplete key={checkin._id} 
+                    <CheckinIncomplete 
+                      key={checkin._id}
+                      id={checkin._id}  
                       description={checkin.habitId.description} 
                       currentChain={checkin.habitId.currentChain} 
-                      goal={checkin.habitId.goalChain} />
+                      goal={checkin.habitId.goalChain}
+                      loadCheckins={this.loadCheckins} />
                 )             
               })
             }      
@@ -66,7 +70,13 @@ class HomePage extends Component {
             {
               this.state.completedCheckins.map(checkin => {
                 return (
-                    <CheckinIncomplete key={checkin._id}/>
+                    <CheckinComplete 
+                      key={checkin._id}
+                      id={checkin._id}  
+                      description={checkin.habitId.description} 
+                      currentChain={checkin.habitId.currentChain} 
+                      goal={checkin.habitId.goalChain}
+                      loadCheckins={this.loadCheckins} />
                 )             
               })
             }  

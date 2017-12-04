@@ -2,7 +2,7 @@ const db = require('../models');
 const moment = require('moment');
 
 //when new habit is created, habit checkins are created for the next 14 days
-function populateCheckins(habitId){
+function populateCheckins(habitId, userId){
   // console.log(habitId);
   let newDate = '';
   for(var i = 0; i < 14; i++){
@@ -10,6 +10,7 @@ function populateCheckins(habitId){
     db.Checkin
       .create({
         habitId: habitId,
+        userId: userId,
         // get today's date, add i days
         date: checkinDate
       })
@@ -33,7 +34,7 @@ module.exports = {
       .create(req.body)
       .then(dbModel => {
         res.json(dbModel)
-        populateCheckins(dbModel._id);
+        populateCheckins(dbModel._id, dbModel.userId);
       })
       .catch(err => res.status(422).json(err));
   },

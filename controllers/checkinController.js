@@ -26,7 +26,7 @@ module.exports = {
   update: function(req, res) {
     console.log(`Update ${req.params.id}`, req.body);
     db.Checkin
-      .findOneAndUpdate({ _id: req.params.id }, req.body, {new: true})
+      .findOneAndUpdate({ _id: req.params.id }, req.body, {new: false})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },  
