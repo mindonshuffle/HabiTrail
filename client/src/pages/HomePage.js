@@ -47,7 +47,7 @@ class HomePage extends Component {
   render() {
     return (
         <Grid item xs={12} sm={10}>
-          <Grid container spacing={16} justify='flex-start'>
+          <Grid container spacing={24} justify='flex-start'>
             
             {
               this.state.pendingCheckins.map(checkin => {

@@ -8,6 +8,7 @@ import Grid from 'material-ui/Grid';
 // import CheckinIncomplete from '../components/CheckinIncomplete/CheckinIncomplete.js';
 // import CheckinComplete from '../components/CheckinComplete/CheckinComplete.js';
 import HabitCard from '../components/HabitCard/HabitCard.js';
+import AddHabit from '../components/AddHabit/AddHabit.js';
 
 //temporary constant user
 // const userId = 'a1f16bae5ece1c4dc4de68e'
@@ -41,7 +42,7 @@ class HabitPage extends Component {
   render() {
     return (
         <Grid item xs={12} sm={10}>
-          <Grid container spacing={16} justify='flex-start'>
+          <Grid container spacing={24} justify='flex-start'>
             
             {
               this.state.habits.map(habit => {
@@ -51,12 +52,17 @@ class HabitPage extends Component {
                       id={habit._id}  
                       description={habit.description} 
                       currentChain={habit.currentChain} 
+                      longestChain={habit.longestChain}
                       goal={habit.goalChain}
+                      createdDate={habit.createdDate} 
                       loadHabits={this.loadHabits} />
+                    
                 )             
               })
             }      
 
+            <AddHabit 
+                userId={this.state.userId}/>
           </Grid>     
         </Grid>
     );

@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <Grid container spacing={16} justify='center'>
+        <Grid container spacing={24} justify='center'>
           <TopBar />
           <Router>
             

@@ -68,7 +68,7 @@ function CheckinComplete(props) {
         <CardActions>
           <Grid container spacing="16" justify="space-around">
             <Grid item>
-              <IconButton className={classes.menuButton} color="dark" aria-label="Menu" onClick={() => confirmClick()}>
+              <IconButton className={classes.menuButton} raised color="dark" aria-label="Menu" onClick={() => confirmClick()}>
                 <CheckIcon />
               </IconButton>
             </Grid>
