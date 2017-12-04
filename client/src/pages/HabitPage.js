@@ -1,8 +1,9 @@
-
 import React, { Component } from 'react';
 import moment from 'moment';
-// import './App.css';
+
 import API from '../utils/API.js';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 
 import Grid from 'material-ui/Grid';
 // import CheckinIncomplete from '../components/CheckinIncomplete/CheckinIncomplete.js';
@@ -12,6 +13,15 @@ import AddHabit from '../components/AddHabit/AddHabit.js';
 
 //temporary constant user
 // const userId = 'a1f16bae5ece1c4dc4de68e'
+const styles = theme => ({
+    pageFrame: {
+        // position: 'absolute',
+        marginLeft: '240px',
+        marginTop: '64px',
+        width: `calc(100% - 290px)`,
+        // backgroundColor: "red",
+      },
+});
 
 class HabitPage extends Component {
   state = {
@@ -40,9 +50,11 @@ class HabitPage extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-        <Grid item xs={12} sm={10}>
-          <Grid container spacing={24} justify='flex-start'>
+        <div className={classes.pageFrame}>
+        {/* <Grid item xs={12} sm={10}> */}
+          <Grid container spacing={16} justify='flex-start'>
             
             {
               this.state.habits.map(habit => {
@@ -56,7 +68,6 @@ class HabitPage extends Component {
                       goal={habit.goalChain}
                       createdDate={habit.createdDate} 
                       loadHabits={this.loadHabits} />
-                    
                 )             
               })
             }      
@@ -66,10 +77,11 @@ class HabitPage extends Component {
                 loadHabits={this.loadHabits}
             />
           </Grid>     
-        </Grid>
+        {/* </Grid> */}
+        </div>
     );
   }
 }
 
-export default HabitPage;
+export default withStyles(styles)(HabitPage);
 

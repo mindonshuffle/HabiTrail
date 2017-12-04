@@ -8,6 +8,8 @@ import IconButton from 'material-ui/IconButton';
 // import CloseIcon from 'material-ui-icons/Close';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import { FormControl, FormHelperText } from 'material-ui/Form';
 import Grid from 'material-ui/Grid';
 import API from '../../utils/API.js';
 import moment from 'moment';
@@ -23,13 +25,6 @@ const styles = theme => ({
   },
   title: {
     color: 'white',
-  },
-  pos: {
-    marginBottom: 12,
-    color: theme.palette.text.secondary,
-  },
-  textField: {
-    
   },
 });
 
@@ -54,6 +49,7 @@ class AddHabit extends React.Component {
       console.log(this.state)
       API.createHabit(this.state.userId, this.state.description, this.state.goal)
         .then(this.props.loadHabits);
+      this.setState({description: '', goal: '90'});
     };
     
     return (
@@ -77,27 +73,39 @@ class AddHabit extends React.Component {
                 
               </Grid>
               <Grid item xs="12">
-                  <TextField
+                  {/* <TextField
                       label="Goal"
                       value={this.state.goal} 
                       onChange={this.handleChange('goal')} 
                       type="number" 
                       className={classes.textField}
                       margin="normal"
-                  />
+                  /> */}
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="goal">
+                      Goal
+                    </InputLabel>
+                    <Input
+                      id="goal"
+                      value={this.state.goal}
+                      onChange={this.handleChange('goal')}
+                      type="number" 
+                      endAdornment={<InputAdornment position="end">Days</InputAdornment>}
+                    />
+                  </FormControl>
               </Grid>
-    
-              <Grid item xs="4">
+              
+              <Grid item xs="2">
                 <Button raised className={classes.button} onClick={() => saveClick()}>
                   Save
                 </Button>
               </Grid>
 
-              <Grid item xs="4">
+              <Grid item xs="1">
                 
               </Grid>
 
-              <Grid item xs="4">
+              <Grid item xs="2">
                 <Button raised className={classes.button}>
                   Cancel
                 </Button>

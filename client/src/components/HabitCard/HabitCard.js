@@ -36,14 +36,6 @@ const styles = theme => ({
 
 function HabitCard(props) {
   const { classes } = props;
-  // const confirmClick = () => {
-  //   API.confirmCheckin(props.id)
-  //     .then(props.loadCheckins);
-  // };
-  // const missedClick = () => {
-  //   API.missedCheckin(props.id)
-  //     .then(props.loadCheckins);
-  // };
 
   return (
     <Grid item xs={12} sm={12} md={6}>

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 // import './App.css';
 import API from '../utils/API.js';
+import { withStyles } from 'material-ui/styles';
 
 import Grid from 'material-ui/Grid';
 import Divider from 'material-ui/Divider';
@@ -12,6 +13,15 @@ import CheckinComplete from '../components/CheckinComplete/CheckinComplete.js';
 
 //temporary constant user
 // const userId = 'a1f16bae5ece1c4dc4de68e'
+
+const styles = theme => ({
+  pageFrame: {
+      // position: 'absolute',
+      marginLeft: '240px',
+      marginTop: '64px',
+      width: `calc(100% - 290px)`,
+    },
+});
 
 class HomePage extends Component {
   state = {
@@ -45,10 +55,13 @@ class HomePage extends Component {
   }
 
   render() {
+    const { classes } = this.props;    
+
     return (
-        <Grid item xs={12} sm={10}>
+        <div className={ classes.pageFrame }>
           <Grid container spacing={24} justify='flex-start'>
-            
+          {/* Only display Pending Section if checkins exist */}
+                
             {
               this.state.pendingCheckins.map(checkin => {
                 return (
@@ -62,10 +75,16 @@ class HomePage extends Component {
                 )             
               })
             }      
-
-            <Grid item xs={12}>
-              <Divider light/>
-            </Grid>
+            {
+              this.state.pendingCheckins[0] ? 
+                (<Grid item xs={12}>        
+                  <Divider light/>
+                </Grid>)
+                :
+                (<Grid item hidden={{xsUp: true}} xs={12}>
+                  <Divider light/>
+                </Grid>)    
+            }
 
             {
               this.state.completedCheckins.map(checkin => {
@@ -82,10 +101,11 @@ class HomePage extends Component {
             }  
 
           </Grid>     
-        </Grid>
+        </div>
     );
   }
 }
 
-export default HomePage;
+export default withStyles(styles)(HomePage);
+
 

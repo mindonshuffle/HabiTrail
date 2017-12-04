@@ -19,11 +19,6 @@ const styles = theme => ({
   cardHeader: {
     backgroundColor: '#5C6BC0',
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
     color: 'white',
   },
@@ -68,7 +63,7 @@ function CheckinComplete(props) {
         <CardActions>
           <Grid container spacing="16" justify="space-around">
             <Grid item>
-              <IconButton className={classes.menuButton} raised color="dark" aria-label="Menu" onClick={() => confirmClick()}>
+              <IconButton className={classes.menuButton} color="dark" aria-label="Menu" onClick={() => confirmClick()}>
                 <CheckIcon />
               </IconButton>
             </Grid>

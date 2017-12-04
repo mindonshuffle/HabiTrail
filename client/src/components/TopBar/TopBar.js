@@ -10,12 +10,13 @@ import MenuIcon from 'material-ui-icons/Menu';
 import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
-  root: {
-    // marginTop: theme.spacing.unit * 3,
-    width: '100%',
-  },
   flex: {
     flex: 1,
+  },
+  TopBar: {
+    position: 'absolute',
+    width: `calc(100% - 240px)`,
+    marginLeft: '240px',
   },
   menuButton: {
     marginLeft: -12,
@@ -27,7 +28,7 @@ function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <Grid item xs={12} className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.TopBar} position="static">
         <Toolbar>
           <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
             <MenuIcon />
