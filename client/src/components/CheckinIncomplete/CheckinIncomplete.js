@@ -29,10 +29,13 @@ const styles = theme => ({
 function CheckinIncomplete(props) {
   const { classes } = props;
   const confirmClick = () => {
+    console.log(props);
+    API.addToChain(props.habitId, props.currentChain);
     API.confirmCheckin(props.id)
       .then(props.loadCheckins);
   };
   const missedClick = () => {
+    API.resetChain(props.habitId, props.currentChain);
     API.missedCheckin(props.id)
       .then(props.loadCheckins);
   };

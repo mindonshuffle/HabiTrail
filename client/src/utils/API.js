@@ -23,6 +23,12 @@ export default {
   },
   deleteHabit: function(habitId){
     return axios.delete(`/api/habit/${habitId}`)
+  },
+  addToChain: function(habitId, currentChain){
+    return axios.put(`/api/habit/${habitId}`, {currentChain: currentChain+1});
+  },
+  resetChain: function(habitId, currentChain){
+    return axios.put(`/api/habit/${habitId}`, {currentChain: 0});
   }
 
 };

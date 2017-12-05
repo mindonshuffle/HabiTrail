@@ -61,6 +61,7 @@ class HomePage extends Component {
   loadCheckins = (newDate) => {
     console.log('Load checkins (current): ',newDate)
     console.log('Load checkins (fromState): ',this.state.date)
+    console.log('Load checking userId: ', this.state.userId)
     API.getCheckins(this.state.userId, typeof newDate === 'string' ? newDate : this.state.date )
     .then(res => {
       this.setState({pendingCheckins: [], completedCheckins: []});
@@ -92,6 +93,7 @@ class HomePage extends Component {
                       key={checkin._id}
                       id={checkin._id}  
                       description={checkin.habitId.description} 
+                      habitId={checkin.habitId._id}
                       currentChain={checkin.habitId.currentChain} 
                       goal={checkin.habitId.goalChain}
                       loadCheckins={this.loadCheckins} />
