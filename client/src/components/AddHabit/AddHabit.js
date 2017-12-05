@@ -5,7 +5,7 @@ import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 // import CheckIcon from 'material-ui-icons/Check';
-// import CloseIcon from 'material-ui-icons/Close';
+import CloseIcon from 'material-ui-icons/Close';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
@@ -51,9 +51,12 @@ class AddHabit extends React.Component {
         .then(this.props.loadHabits);
       this.setState({description: '', goal: '90'});
     };
+    const cancelClick = () => {
+      this.setState({description: '', goal: '90'});
+    };
     
     return (
-      <Grid item xs={12} sm={12} md={6}>
+      <Grid item style={{paddingTop: '16px', paddingLeft: '16px' }} xs={12} sm={12} md={6}>
         <Card className={classes.card}>
           
           <CardHeader title="Add New Habit" classes={{title: classes.title}} className={classes.cardHeader} />

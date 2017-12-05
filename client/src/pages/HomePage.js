@@ -16,10 +16,9 @@ import CheckinComplete from '../components/CheckinComplete/CheckinComplete.js';
 
 const styles = theme => ({
   pageFrame: {
-      // position: 'absolute',
-      marginLeft: '240px',
-      marginTop: '64px',
-      width: `calc(100% - 290px)`,
+      marginLeft: '241px',
+      marginTop: '0',
+      width: `calc(100% - 255px)`,
     },
 });
 
@@ -59,7 +58,7 @@ class HomePage extends Component {
 
     return (
         <div className={ classes.pageFrame }>
-          <Grid container spacing={24} justify='flex-start'>
+          <Grid container spacing={0} justify='flex-start'>
           {/* Only display Pending Section if checkins exist */}
                 
             {
@@ -78,7 +77,7 @@ class HomePage extends Component {
             {
               this.state.pendingCheckins[0] ? 
                 (<Grid item xs={12}>        
-                  <Divider light/>
+                  <Divider light style={{marginTop: '16px', marginLeft: '16px'}}/>
                 </Grid>)
                 :
                 (<Grid item hidden={{xsUp: true}} xs={12}>
@@ -92,6 +91,7 @@ class HomePage extends Component {
                     <CheckinComplete 
                       key={checkin._id}
                       id={checkin._id}  
+                      status={checkin.status}
                       description={checkin.habitId.description} 
                       currentChain={checkin.habitId.currentChain} 
                       goal={checkin.habitId.goalChain}

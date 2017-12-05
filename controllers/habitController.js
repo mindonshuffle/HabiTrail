@@ -54,5 +54,11 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+      db.Checkin
+      .remove({ habitId : req.params.id }, function(err){
+        if(err) throw err; 
+      })
+      // .find({ habitId: req.params.id })
+      // .then(dbModel => {console.log(dbModel)})
     }
   };

@@ -56,6 +56,7 @@ class AppDrawer extends React.Component {
     return (
       <Drawer
         type="permanent"
+        style={{ position: 'fixed', height: '100%', left: 0, top: 0 }}
         classes={{
           paper: classes.drawerPaper,
         }}
@@ -64,7 +65,7 @@ class AppDrawer extends React.Component {
         <div className={classes.drawerHeader} />
         <Divider />
 
-        {/* <Grid container justify="spaceBetween"> */}
+        {/* <Grid container direction="column" justify="spaceBetween"> */}
         {/* <Grid item xs={12}> */}
           <Link style={{ textDecoration: 'none' }} to="/">
             <ListItem button onClick={this.homeClick}>
@@ -82,14 +83,18 @@ class AppDrawer extends React.Component {
               <ListItemText primary="Habits" />
             </ListItem>
           </Link>
-        {/* </Grid> */}
-        {/* <Grid item xs={12}> */}
+          
+        {/* </Grid>
+        <Grid item xs={12}> */}
+        <div style={{position: 'absolute', bottom: '0', width: '240px'}}>
+            <Divider />
             <ListItem button onClick={this.homeClick}>
               <ListItemIcon style={{opacity: 0}}>
                 <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>
+        </div>
           {/* </Grid> */}
         {/* </Grid> */}
       </Drawer>

@@ -18,17 +18,11 @@ const styles = theme => ({
   cardHeader: {
     backgroundColor: '#5C6BC0',
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
     color: 'white',
   },
-  pos: {
-    marginBottom: 12,
-    color: theme.palette.text.secondary,
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
   },
 });
 
@@ -44,7 +38,7 @@ function CheckinIncomplete(props) {
   };
 
   return (
-    <Grid item xs={12} sm={12} md={6}>
+    <Grid item style={{paddingTop: '16px', paddingLeft: '16px' }} xs={12} sm={12} md={6}>
       <Card className={classes.card}>
         
         <CardHeader title={props.description} classes={{title: classes.title}} className={classes.cardHeader} />
@@ -67,14 +61,16 @@ function CheckinIncomplete(props) {
         <CardActions>
           <Grid container spacing="16" justify="space-around">
             <Grid item>
-              <IconButton className={classes.menuButton} color="dark" aria-label="Menu" onClick={() => confirmClick()}>
-                <CheckIcon />
-              </IconButton>
+              <Button className={classes.button} raised color="primary" onClick={() => confirmClick()}>
+                Completed
+                <CheckIcon className={classes.rightIcon} />
+              </Button>
             </Grid>
             <Grid item>
-              <IconButton className={classes.menuButton} color="dark" aria-label="Menu" onClick={() => missedClick()}>
-                <CloseIcon />
-              </IconButton>
+              <Button className={classes.button} raised color="primary" onClick={() => missedClick()}>
+                Missed
+                <CloseIcon className={classes.rightIcon} />
+              </Button>
             </Grid>
           </Grid>
         </CardActions>

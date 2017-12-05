@@ -13,12 +13,16 @@ import moment from 'moment';
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
+    // minWidth: 500,
+    // maxWidth: 275,
     textAlign: 'center',
   },
   cardHeader: {
     textAlign: 'left',
     backgroundColor: '#5C6BC0',
+  },
+  button: {
+    marginTop: '12px',
   },
   bullet: {
     display: 'inline-block',
@@ -28,17 +32,19 @@ const styles = theme => ({
   title: {
     color: 'white',
   },
-  pos: {
-    marginBottom: 12,
-    color: theme.palette.text.secondary,
-  },
 });
 
 function HabitCard(props) {
   const { classes } = props;
 
+  const deleteClick = () => {
+    API.deleteHabit(props.id)
+    .then(props.loadHabits);
+
+  };
+
   return (
-    <Grid item xs={12} sm={12} md={6}>
+    <Grid item style={{paddingTop: '16px', paddingLeft: '16px' }} xs={12} sm={12} md={6}>
       <Card className={classes.card}>
         
         <CardHeader title={props.description} classes={{title: classes.title}} className={classes.cardHeader} />
@@ -64,6 +70,12 @@ function HabitCard(props) {
               <Typography type="subheading" component="h2">
                 Starting Date: {moment(props.createdDate).format('MMMM Do, YYYY').toString()}
               </Typography>
+            <Grid item>
+              <Button className={classes.button} raised color="accent" onClick={() => deleteClick()}>
+                Delete
+                <CloseIcon className={classes.rightIcon} />
+              </Button>
+            </Grid>
             </Grid>
           </Grid>
         </CardContent>

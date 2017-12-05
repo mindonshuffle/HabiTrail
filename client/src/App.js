@@ -30,17 +30,14 @@ class App extends Component {
     return (
       <Router>
         <MuiThemeProvider theme={theme}>
-          <Grid container spacing={24} justify='center'>
-            <TopBar />
-            <AppDrawer />
-        
-              <Switch>          
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/habits" component={HabitPage} />
-                <Route exact path="/history" component={HabitPage} />
-              </Switch>              
-                
-          </Grid>    
+          <AppDrawer />
+
+          <TopBar />
+            <Switch>          
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/habits" component={HabitPage} />
+              <Route exact path="/history" component={HabitPage} />
+            </Switch>               
         </ MuiThemeProvider>
       </Router>
     );

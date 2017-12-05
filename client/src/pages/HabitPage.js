@@ -4,23 +4,26 @@ import moment from 'moment';
 import API from '../utils/API.js';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-
+import AddIcon from 'material-ui-icons/Add';
+import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
-// import CheckinIncomplete from '../components/CheckinIncomplete/CheckinIncomplete.js';
-// import CheckinComplete from '../components/CheckinComplete/CheckinComplete.js';
 import HabitCard from '../components/HabitCard/HabitCard.js';
 import AddHabit from '../components/AddHabit/AddHabit.js';
+import Tooltip from 'material-ui/Tooltip';
 
 //temporary constant user
 // const userId = 'a1f16bae5ece1c4dc4de68e'
 const styles = theme => ({
     pageFrame: {
         // position: 'absolute',
-        marginLeft: '240px',
-        marginTop: '64px',
-        width: `calc(100% - 290px)`,
-        // backgroundColor: "red",
+        marginLeft: '241px',
+        width: `calc(100% - 255px)`,
       },
+    fab: {
+        position: 'absolute',
+        right: '30px',
+        bottom: '30px',
+    }
 });
 
 class HabitPage extends Component {
@@ -53,8 +56,8 @@ class HabitPage extends Component {
     const { classes } = this.props;
     return (
         <div className={classes.pageFrame}>
-        {/* <Grid item xs={12} sm={10}> */}
-          <Grid container spacing={16} justify='flex-start'>
+        
+          <Grid container spacing={0} justify='flex-start'>
             
             {
               this.state.habits.map(habit => {
@@ -71,13 +74,18 @@ class HabitPage extends Component {
                 )             
               })
             }      
-
+            
             <AddHabit 
-                userId={this.state.userId}
-                loadHabits={this.loadHabits}
+              userId={this.state.userId}
+              loadHabits={this.loadHabits}
             />
-          </Grid>     
-        {/* </Grid> */}
+          </Grid>  
+          <Tooltip id="tooltip-top" title="Add Habit" placement="top">  
+            <Button fab color="primary" aria-label="add" className={classes.fab}>
+              <AddIcon />
+            </Button>
+          </Tooltip>   
+        
         </div>
     );
   }

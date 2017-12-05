@@ -14,9 +14,10 @@ const styles = theme => ({
     flex: 1,
   },
   TopBar: {
-    position: 'absolute',
-    width: `calc(100% - 240px)`,
+    position: 'relative',
+    width: `calc(100% - 241px)`,
     marginLeft: '240px',
+    top: '0',
   },
   menuButton: {
     marginLeft: -12,
