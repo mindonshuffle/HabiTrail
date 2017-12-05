@@ -7,7 +7,7 @@ function populateCheckins(habitId, userId){
   
   for(var i = 0; i < 14; i++){
   
-    const checkinDate = moment().startOf('day').add(i, 'days').toDate();
+    const checkinDate = moment().add(i, 'days').startOf('day').toDate();
     // console.log(checkinDate);
     db.Checkin
       .create({

@@ -27,7 +27,7 @@ class HomePage extends Component {
     userId: '5a1f16bae5ece1c4dc4de68e',
     pendingCheckins: [],
     completedCheckins: [],
-    date: moment().startOf('day').toString()
+    date: moment().startOf('day').format('YYYYMMDD').toString(),
   };
 
   componentDidMount() {
@@ -37,7 +37,7 @@ class HomePage extends Component {
 // retrieve all checkins for user with current date and sort into state arrays
   loadCheckins = () => {
     console.log(this.state.date)
-    API.getCheckins(this.state.userId, '20171204')
+    API.getCheckins(this.state.userId, this.state.date)
     .then(res => {
       this.setState({pendingCheckins: [], completedCheckins: []});
       res.data.forEach( checkin =>{

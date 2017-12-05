@@ -61,7 +61,7 @@ function CheckinComplete(props) {
       <CloseIcon />
     </Avatar>
   );
-  const progress = props.currentChain === 0 ? 0 : props.goal / props.currentChain;
+  const progress = props.currentChain === 0 ? 0 : (props.currentChain / props.goal) * 100;
 
   return (
     <Grid item style={{paddingTop: '16px', paddingLeft: '16px' }} xs={12} sm={12} md={6}>

@@ -9,7 +9,10 @@ import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import HabitCard from '../components/HabitCard/HabitCard.js';
 import AddHabit from '../components/AddHabit/AddHabit.js';
+import AddHabitDialog from '../components/AddHabitDialog/AddHabitDialog.js';
+
 import Tooltip from 'material-ui/Tooltip';
+import Dialog from 'material-ui/Dialog';
 
 //temporary constant user
 // const userId = 'a1f16bae5ece1c4dc4de68e'
@@ -30,7 +33,16 @@ class HabitPage extends Component {
   state = {
     userId: '5a1f16bae5ece1c4dc4de68e',
     habits: [],
-    date: moment.utc().startOf('day').toString()
+    date: moment.utc().startOf('day').toString(),
+    dialogOpen: false,
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleRequestClose = () => {
+    this.setState({ open: false });
   };
 
   componentDidMount() {
@@ -75,16 +87,24 @@ class HabitPage extends Component {
               })
             }      
             
-            <AddHabit 
+            {/* <AddHabit 
               userId={this.state.userId}
               loadHabits={this.loadHabits}
-            />
+            /> */}
           </Grid>  
           <Tooltip id="tooltip-top" title="Add Habit" placement="top">  
-            <Button fab color="primary" aria-label="add" className={classes.fab}>
+            <Button onClick={this.handleClickOpen} fab color="primary" aria-label="add" className={classes.fab}>
               <AddIcon />
             </Button>
-          </Tooltip>   
+          </Tooltip>
+
+          <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+            <AddHabitDialog 
+              userId={this.state.userId} 
+              handleRequestClose={this.handleRequestClose} 
+              loadHabits={this.loadHabits}
+            />
+          </Dialog>   
         
         </div>
     );
