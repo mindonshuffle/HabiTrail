@@ -27,17 +27,41 @@ class HomePage extends Component {
     userId: '5a1f16bae5ece1c4dc4de68e',
     pendingCheckins: [],
     completedCheckins: [],
-    date: moment().startOf('day').format('YYYYMMDD').toString(),
+    date: null,
   };
 
+  componentWillMount() {
+    console.log('Did receive (load):', this.props.date);
+    let newDate = moment.utc(this.props.date).format('YYYYMMDD').toString();
+    console.log('newDate: ', newDate);
+    this.setState({date: newDate});
+  }
+
   componentDidMount() {
-    this.loadCheckins();
+    console.log('didMount date: ', this.state.date);
+    this.loadCheckins(this.state.date);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // console.log('Did receive:', this.props.date);
+    // let newDate = moment.utc(this.props.date).format('YYYYMMDD').toString();
+    // console.log('newDate: ', newDate);
+    // this.setState({date: newDate});
+    // console.log('loadCheckins date: ', this.state.date);
+    if(this.props !== nextProps){
+      let newDate = moment.utc(nextProps.date).format('YYYYMMDD').toString();
+      this.setState({
+        date: newDate,
+      })
+      this.loadCheckins(newDate);
+    }
   }
 
 // retrieve all checkins for user with current date and sort into state arrays
-  loadCheckins = () => {
-    console.log(this.state.date)
-    API.getCheckins(this.state.userId, this.state.date)
+  loadCheckins = (newDate) => {
+    console.log('Load checkins (current): ',newDate)
+    console.log('Load checkins (fromState): ',this.state.date)
+    API.getCheckins(this.state.userId, typeof newDate === 'string' ? newDate : this.state.date )
     .then(res => {
       this.setState({pendingCheckins: [], completedCheckins: []});
       res.data.forEach( checkin =>{

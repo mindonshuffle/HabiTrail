@@ -5,9 +5,9 @@ const moment = require('moment');
 function populateCheckins(habitId, userId){
   // console.log(habitId);
   
-  for(var i = 0; i < 14; i++){
+  for(var i = 0; i < 19; i++){
   
-    const checkinDate = moment().add(i, 'days').startOf('day').toDate();
+    const checkinDate = moment().subtract(5, 'days').add(i, 'days').startOf('day').toDate();
     // console.log(checkinDate);
     db.Checkin
       .create({

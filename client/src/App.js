@@ -10,6 +10,7 @@ import TopBar from './components/TopBar/TopBar.js';
 import HomePage from './pages/HomePage.js';
 import HabitPage from './pages/HabitPage.js';
 import AppDrawer from './components/AppDrawer/AppDrawer.js';
+import moment from 'moment';
 
 const theme = createMuiTheme();
 
@@ -23,21 +24,54 @@ const styles = theme => ({
   },
 });
 
+//allow props through react router
+const renderMergedProps = (component, ...rest) => {
+  const finalProps = Object.assign({}, ...rest);
+  return (
+    React.createElement(component, finalProps)
+  );
+}
+
+const PropsRoute = ({ component, ...rest }) => {
+  return (
+    <Route {...rest} render={routeProps => {
+      return renderMergedProps(component, routeProps, rest);
+    }}/>
+  );
+}
+
 //begin root component definiton
 class App extends Component {
+  state = {
+    userId: '5a1f16bae5ece1c4dc4de68e',
+    date: moment.utc().startOf('day').toString(),
+  };
+
+  incDate = () => {
+    let newDate = moment.utc(this.state.date).add(1, 'days').startOf('day').toString();
+    this.setState({date: newDate});
+  };
+
+  decDate = () => {
+    let newDate = moment.utc(this.state.date).subtract(1, 'days').startOf('day').toString();
+    this.setState({date: newDate});    
+  };
+
   render() {
 
     return (
       <Router>
         <MuiThemeProvider theme={theme}>
           <AppDrawer />
-
-          <TopBar />
-            <Switch>          
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/habits" component={HabitPage} />
-              <Route exact path="/history" component={HabitPage} />
-            </Switch>               
+          <Switch>
+          <PropsRoute path='/habits' component={TopBar} date={null} incDate={this.incDate} decDate={this.decDate}/>
+          <PropsRoute path='/' component={TopBar} date={this.state.date} incDate={this.incDate} decDate={this.decDate}/>
+          </Switch>
+          <Switch>          
+            <Route exact path="/habits" component={HabitPage} />
+            <Route exact path="/history" component={HabitPage} />
+            <PropsRoute path='/' component={HomePage} date={this.state.date} />
+          </Switch>               
         </ MuiThemeProvider>
       </Router>
     );

@@ -7,11 +7,14 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
+import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
+import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import Grid from 'material-ui/Grid';
+import moment from 'moment';
 
 const styles = theme => ({
   flex: {
-    flex: 1,
+    // flex: 1,
   },
   TopBar: {
     position: 'relative',
@@ -20,25 +23,45 @@ const styles = theme => ({
     top: '0',
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    marginLeft: 0,
+    marginRight: 0,
   },
 });
 
 function ButtonAppBar(props) {
   const { classes } = props;
+  const displayDate = moment(props.date).format('dddd, MMMM Do YYYY').toString();
+
+  const DatePicker = (
+    <Toolbar>
+      <IconButton className={classes.menuButton} onClick={props.decDate} color="contrast" aria-label="Menu">
+        <ChevronLeftIcon />
+      </IconButton>
+      <Typography type="title" color="inherit" className={classes.flex}>
+        {displayDate}
+      </Typography>
+      <IconButton className={classes.menuButton} onClick={props.incDate} color="contrast" aria-label="Menu">
+        <ChevronRightIcon />
+      </IconButton>
+    </Toolbar>
+  )
+  
+  const HabitLabel = (
+    <Toolbar>
+      <IconButton className={classes.menuButton} onClick={props.incDate} color="contrast" aria-label="Menu">
+      </IconButton>
+      <Typography type="title" color="inherit" className={classes.flex}>
+        Manage Habits
+      </Typography>
+      <IconButton className={classes.menuButton} onClick={props.incDate} color="contrast" aria-label="Menu">
+      </IconButton>
+    </Toolbar>
+  )
+
   return (
     <Grid item xs={12} className={classes.root}>
       <AppBar className={classes.TopBar} position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography type="title" color="inherit" className={classes.flex}>
-            HabiTrail
-          </Typography>
-          <Button color="contrast">Login</Button>
-        </Toolbar>
+         {props.date ? DatePicker : HabitLabel}  
       </AppBar>
     </Grid>
   );
