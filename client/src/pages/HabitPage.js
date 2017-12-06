@@ -10,6 +10,9 @@ import Grid from 'material-ui/Grid';
 import HabitCard from '../components/HabitCard/HabitCard.js';
 import AddHabit from '../components/AddHabit/AddHabit.js';
 import AddHabitDialog from '../components/AddHabitDialog/AddHabitDialog.js';
+import Snackbar from 'material-ui/Snackbar';
+import IconButton from 'material-ui/IconButton';
+import CloseIcon from 'material-ui-icons/Close';
 
 import Tooltip from 'material-ui/Tooltip';
 import Dialog from 'material-ui/Dialog';
@@ -23,6 +26,7 @@ const styles = theme => ({
         width: `calc(100% - 255px)`,
       },
     fab: {
+        backgroundColor: '#5c6bc0',
         position: 'absolute',
         right: '30px',
         bottom: '30px',
@@ -31,10 +35,11 @@ const styles = theme => ({
 
 class HabitPage extends Component {
   state = {
-    userId: '5a1f16bae5ece1c4dc4de68e',
+    userId: this.props.userId,
     habits: [],
     date: moment.utc().startOf('day').toString(),
     dialogOpen: false,
+    snackbarOpen: false,
   };
 
   handleClickOpen = () => {
@@ -48,6 +53,17 @@ class HabitPage extends Component {
   componentDidMount() {
     this.loadHabits();
   }
+
+  handleSnack = () => {
+    this.setState({ snackbarOpen: true });
+  };
+
+  handleSnackClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ snackbarOpen: false });
+  };
 
 // retrieve all checkins for user with current date and sort into state arrays
   loadHabits = () => {
@@ -82,7 +98,8 @@ class HabitPage extends Component {
                       longestChain={habit.longestChain}
                       goal={habit.goalChain}
                       createdDate={habit.createdDate} 
-                      loadHabits={this.loadHabits} />
+                      loadHabits={this.loadHabits}
+                      handleSnack={this.handleSnack} />
                 )             
               })
             }      
@@ -105,6 +122,34 @@ class HabitPage extends Component {
               loadHabits={this.loadHabits}
             />
           </Dialog>   
+
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            open={this.state.snackbarOpen}
+            autoHideDuration={4000}
+            onRequestClose={this.handleSnackClose}
+            SnackbarContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id">Habit Deleted</span>}
+            action={[
+              <Button key="undo" color="accent" dense onClick={this.handleRequestClose}>
+                UNDO
+              </Button>,
+              <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                className={classes.close}
+                onClick={this.handleSnackClose}
+              >
+                <CloseIcon />
+              </IconButton>,
+            ]}
+          />
         
         </div>
     );

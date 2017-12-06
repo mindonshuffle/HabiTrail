@@ -15,12 +15,19 @@ import moment from 'moment';
 const styles = theme => ({
   flex: {
     // flex: 1,
+    width: '350px',
+    textAlign: 'center',
   },
   TopBar: {
+    backgroundColor: '#5c6bc0',
     position: 'relative',
     width: `calc(100% - 241px)`,
     marginLeft: '240px',
     top: '0',
+    alignItems: 'center',
+  },
+  dateRange: {
+    width: '150px',
   },
   menuButton: {
     marginLeft: 0,

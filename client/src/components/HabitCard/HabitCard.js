@@ -24,11 +24,6 @@ const styles = theme => ({
   button: {
     marginTop: '12px',
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
     color: 'white',
   },
@@ -40,15 +35,20 @@ function HabitCard(props) {
   const deleteClick = () => {
     API.deleteHabit(props.id)
     .then(props.loadHabits);
-
+    props.handleSnack();
   };
 
   return (
     <Grid item style={{paddingTop: '16px', paddingLeft: '16px' }} xs={12} sm={12} md={6}>
       <Card className={classes.card}>
         
-        <CardHeader title={props.description} classes={{title: classes.title}} className={classes.cardHeader} />
-                  
+        {/* <CardHeader title={props.description} classes={{title: classes.title}} className={classes.cardHeader} /> */}
+        <CardContent style={{textAlign: 'left', backgroundColor: '#ef5350'}}>
+          <Typography style={{color: '#ffffff'}} type="headline" component="h2">
+            {props.description}
+          </Typography>
+        </CardContent>          
+
         <CardContent>
           <Grid container spacing="16" justify="space-between">
             <Grid item xs="12" sm="4">

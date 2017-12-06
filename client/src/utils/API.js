@@ -24,8 +24,11 @@ export default {
   deleteHabit: function(habitId){
     return axios.delete(`/api/habit/${habitId}`)
   },
-  addToChain: function(habitId, currentChain){
-    return axios.put(`/api/habit/${habitId}`, {currentChain: currentChain+1});
+  addToChain: function(habitId, currentChain, longestChain){
+    if(currentChain+1 > longestChain){
+      longestChain = currentChain+1;
+    }
+    return axios.put(`/api/habit/${habitId}`, {currentChain: currentChain+1, longestChain: longestChain});
   },
   resetChain: function(habitId, currentChain){
     return axios.put(`/api/habit/${habitId}`, {currentChain: 0});

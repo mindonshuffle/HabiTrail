@@ -16,7 +16,6 @@ const theme = createMuiTheme();
 
 const styles = theme => ({
   appFrame: {
-    backgroundColor: 'black',
     position: 'relative',
     display: 'flex',
     width: '100%',
@@ -68,9 +67,8 @@ class App extends Component {
           <PropsRoute path='/' component={TopBar} date={this.state.date} incDate={this.incDate} decDate={this.decDate}/>
           </Switch>
           <Switch>          
-            <Route exact path="/habits" component={HabitPage} />
-            <Route exact path="/history" component={HabitPage} />
-            <PropsRoute path='/' component={HomePage} date={this.state.date} />
+            <PropsRoute path='/habits' component={HabitPage} userId={this.state.userId} />
+            <PropsRoute path='/' component={HomePage} userId={this.state.userId} date={this.state.date} />
           </Switch>               
         </ MuiThemeProvider>
       </Router>

@@ -15,7 +15,7 @@ import HomeIcon from 'material-ui-icons/Home';
 import ListIcon from 'material-ui-icons/List';
 import { Link } from "react-router-dom";
 import Grid from 'material-ui/Grid';
-// import { mailFolderListItems, otherMailFolderListItems } from './tileData';
+import AccountCircleIcon from 'material-ui-icons/AccountCircle';
 
 const drawerWidth = '240px';
 
@@ -29,7 +29,6 @@ const styles = theme => ({
   },
   drawerHeader: theme.mixins.toolbar,
   content: {
-    // backgroundColor: theme.palette.background.default,
     width: '100%',
     padding: theme.spacing.unit * 3,
     height: 'calc(100% - 56px)',
@@ -62,7 +61,8 @@ class AppDrawer extends React.Component {
         }}
         anchor="left"
       >
-        <div className={classes.drawerHeader} />
+        <div className={classes.drawerHeader}>
+        </div>
         <Divider />
 
         {/* <Grid container direction="column" justify="spaceBetween"> */}
@@ -89,8 +89,8 @@ class AppDrawer extends React.Component {
         <div style={{position: 'absolute', bottom: '0', width: '240px'}}>
             <Divider />
             <ListItem button onClick={this.homeClick}>
-              <ListItemIcon style={{opacity: 0}}>
-                <HomeIcon />
+              <ListItemIcon>
+                <AccountCircleIcon />
               </ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItem>

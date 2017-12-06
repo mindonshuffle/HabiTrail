@@ -7,6 +7,7 @@ import { withStyles } from 'material-ui/styles';
 
 import Grid from 'material-ui/Grid';
 import Divider from 'material-ui/Divider';
+import Typography from 'material-ui/Typography';
 // import TopBar from '../components/TopBar/TopBar.js';
 import CheckinIncomplete from '../components/CheckinIncomplete/CheckinIncomplete.js';
 import CheckinComplete from '../components/CheckinComplete/CheckinComplete.js';
@@ -16,15 +17,21 @@ import CheckinComplete from '../components/CheckinComplete/CheckinComplete.js';
 
 const styles = theme => ({
   pageFrame: {
+    // backgroundColor: 'black',
       marginLeft: '241px',
       marginTop: '0',
       width: `calc(100% - 255px)`,
     },
+  prompt: {
+    marginLeft: '16px',
+    marginTop: '16px',
+    marginBottom: '0px',
+  }
 });
 
 class HomePage extends Component {
   state = {
-    userId: '5a1f16bae5ece1c4dc4de68e',
+    userId: this.props.userId,
     pendingCheckins: [],
     completedCheckins: [],
     date: null,
@@ -82,52 +89,64 @@ class HomePage extends Component {
     const { classes } = this.props;    
 
     return (
-        <div className={ classes.pageFrame }>
-          <Grid container spacing={0} justify='flex-start'>
-          {/* Only display Pending Section if checkins exist */}
-                
-            {
-              this.state.pendingCheckins.map(checkin => {
-                return (
-                    <CheckinIncomplete 
-                      key={checkin._id}
-                      id={checkin._id}  
-                      description={checkin.habitId.description} 
-                      habitId={checkin.habitId._id}
-                      currentChain={checkin.habitId.currentChain} 
-                      goal={checkin.habitId.goalChain}
-                      loadCheckins={this.loadCheckins} />
-                )             
-              })
-            }      
-            {
-              this.state.pendingCheckins[0] ? 
-                (<Grid item xs={12}>        
-                  <Divider light style={{marginTop: '16px', marginLeft: '16px'}}/>
-                </Grid>)
-                :
-                (<Grid item hidden={{xsUp: true}} xs={12}>
-                  <Divider light/>
-                </Grid>)    
-            }
+      <div className={ classes.pageFrame }>
+        <Grid container spacing={0} justify='flex-start'>
+          
+          {/* Show prompt only if pending checkins exist */}
+          {this.state.pendingCheckins[0] ? (
+            <Grid item xs={12}>
+              <Typography className={classes.prompt} type="headline" component="h2">
+                Today, did you...
+              </Typography>
+            </Grid>
+          ):
+          (<Grid />)}
+        
+          {
+            this.state.pendingCheckins.map(checkin => {
+              return (
+                <CheckinIncomplete 
+                key={checkin._id}
+                id={checkin._id}  
+                description={checkin.habitId.description} 
+                habitId={checkin.habitId._id}
+                longestChain={checkin.habitId.longestChain} 
+                currentChain={checkin.habitId.currentChain} 
+                goal={checkin.habitId.goalChain}
+                loadCheckins={this.loadCheckins} />
+              )             
+            })
+          }      
+          
+          {/* Only display Divider if checkins exist */}
+          {
+            this.state.pendingCheckins[0] ? 
+              (<Grid item xs={12}>        
+                <Divider light style={{marginTop: '16px', marginLeft: '16px'}}/>
+              </Grid>)
+              :
+              (<Grid item hidden={{xsUp: true}} xs={12}>
+                <Divider light/>
+              </Grid>)    
+          }
 
-            {
-              this.state.completedCheckins.map(checkin => {
-                return (
-                    <CheckinComplete 
-                      key={checkin._id}
-                      id={checkin._id}  
-                      status={checkin.status}
-                      description={checkin.habitId.description} 
-                      currentChain={checkin.habitId.currentChain} 
-                      goal={checkin.habitId.goalChain}
-                      loadCheckins={this.loadCheckins} />
-                )             
-              })
-            }  
+          {
+            this.state.completedCheckins.map(checkin => {
+              return (
+                  <CheckinComplete 
+                    key={checkin._id}
+                    id={checkin._id}  
+                    status={checkin.status}
+                    description={checkin.habitId.description} 
+                    currentChain={checkin.habitId.currentChain} 
+                    goal={checkin.habitId.goalChain}
+                    loadCheckins={this.loadCheckins} />
+              )             
+            })
+          }  
 
-          </Grid>     
-        </div>
+        </Grid>     
+      </div>
     );
   }
 }

@@ -21,6 +21,9 @@ const styles = theme => ({
   title: {
     color: 'white',
   },
+  button: {
+    marginTop: '12px',
+  },
   rightIcon: {
     marginLeft: theme.spacing.unit,
   },
@@ -30,7 +33,7 @@ function CheckinIncomplete(props) {
   const { classes } = props;
   const confirmClick = () => {
     console.log(props);
-    API.addToChain(props.habitId, props.currentChain);
+    API.addToChain(props.habitId, props.currentChain, props.longestChain);
     API.confirmCheckin(props.id)
       .then(props.loadCheckins);
   };
@@ -58,25 +61,29 @@ function CheckinIncomplete(props) {
                 Goal: {props.goal}
               </Typography>
             </Grid>
+            <Grid container spacing ="16" justify="space-around">
+              <Grid item>
+                <Button className={classes.button} raised color="primary" onClick={() => confirmClick()}>
+                  Completed
+                  <CheckIcon className={classes.rightIcon} />
+                </Button>
+              </Grid>
+            
+              <Grid item>
+                <Button className={classes.button} raised color="primary" onClick={() => missedClick()}>
+                  Missed
+                  <CloseIcon className={classes.rightIcon} />
+                </Button>
+              </Grid>
+
+            </Grid>
           </Grid>
         </CardContent>
-
+{/* 
         <CardActions>
           <Grid container spacing="16" justify="space-around">
-            <Grid item>
-              <Button className={classes.button} raised color="primary" onClick={() => confirmClick()}>
-                Completed
-                <CheckIcon className={classes.rightIcon} />
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button className={classes.button} raised color="primary" onClick={() => missedClick()}>
-                Missed
-                <CloseIcon className={classes.rightIcon} />
-              </Button>
-            </Grid>
           </Grid>
-        </CardActions>
+        </CardActions> */}
 
       </Card>
     </Grid>
