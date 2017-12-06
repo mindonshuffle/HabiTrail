@@ -10,7 +10,9 @@ import TopBar from './components/TopBar/TopBar.js';
 import HomePage from './pages/HomePage.js';
 import HabitPage from './pages/HabitPage.js';
 import AppDrawer from './components/AppDrawer/AppDrawer.js';
+import LoginDialog from './components/LoginDialog/LoginDialog.js';
 import moment from 'moment';
+import Dialog from 'material-ui/Dialog';
 
 const theme = createMuiTheme();
 
@@ -42,6 +44,7 @@ const PropsRoute = ({ component, ...rest }) => {
 //begin root component definiton
 class App extends Component {
   state = {
+    dialogOpen: true,
     userId: '5a1f16bae5ece1c4dc4de68e',
     date: moment.utc().startOf('day').toString(),
   };
@@ -54,6 +57,16 @@ class App extends Component {
   decDate = () => {
     let newDate = moment.utc(this.state.date).subtract(1, 'days').startOf('day').toString();
     this.setState({date: newDate});    
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleRequestClose = () => {
+    if(this.state.userId !== ''){
+      this.setState({ dialogOpen: false });
+    }
   };
 
   render() {
@@ -69,7 +82,13 @@ class App extends Component {
           <Switch>          
             <PropsRoute path='/habits' component={HabitPage} userId={this.state.userId} />
             <PropsRoute path='/' component={HomePage} userId={this.state.userId} date={this.state.date} />
-          </Switch>               
+          </Switch>
+          <Dialog open={this.state.dialogOpen} onRequestClose={this.handleRequestClose}>
+            <LoginDialog 
+              userId={this.state.userId} 
+              handleRequestClose={this.handleRequestClose}
+            />
+          </Dialog>                
         </ MuiThemeProvider>
       </Router>
     );
