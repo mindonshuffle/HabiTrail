@@ -23,6 +23,7 @@ const styles = theme => ({
       width: `calc(100% - 255px)`,
     },
   prompt: {
+    color: '#616161',
     marginLeft: '16px',
     marginTop: '16px',
     marginBottom: '0px',
@@ -122,11 +123,11 @@ class HomePage extends Component {
           {
             this.state.pendingCheckins[0] ? 
               (<Grid item xs={12}>        
-                <Divider light style={{marginTop: '16px', marginLeft: '16px'}}/>
+                <Divider style={{marginTop: '16px', marginLeft: '16px'}}/>
               </Grid>)
               :
               (<Grid item hidden={{xsUp: true}} xs={12}>
-                <Divider light/>
+                <Divider />
               </Grid>)    
           }
 

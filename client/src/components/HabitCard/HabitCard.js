@@ -5,7 +5,7 @@ import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import CheckIcon from 'material-ui-icons/Check';
-import CloseIcon from 'material-ui-icons/Close';
+import DeleteIcon from 'material-ui-icons/Delete';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import API from '../../utils/API.js';
@@ -25,8 +25,12 @@ const styles = theme => ({
     marginTop: '12px',
   },
   title: {
-    color: 'white',
+    color: '#ffffff',
   },
+  rightIcon: {
+    color: '#616161',
+    // marginLeft: theme.spacing.unit,
+  }
 });
 
 function HabitCard(props) {
@@ -44,9 +48,18 @@ function HabitCard(props) {
         
         {/* <CardHeader title={props.description} classes={{title: classes.title}} className={classes.cardHeader} /> */}
         <CardContent style={{textAlign: 'left', backgroundColor: '#ef5350'}}>
-          <Typography style={{color: '#ffffff'}} type="headline" component="h2">
-            {props.description}
-          </Typography>
+          <Grid container alignItems="center" justify="space-between">
+            <Grid item> 
+              <Typography style={{color: '#ffffff', marginLeft: '0px'}} type="headline" component="h2">
+                {props.description}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button style={{backgroundColor: '#ffffff'}} raised color="default" dense onClick={() => deleteClick()}>
+                <DeleteIcon className={classes.rightIcon} />
+              </Button>
+            </Grid>
+          </Grid>
         </CardContent>          
 
         <CardContent>
@@ -70,12 +83,12 @@ function HabitCard(props) {
               <Typography type="subheading" component="h2">
                 Starting Date: {moment(props.createdDate).format('MMMM Do, YYYY').toString()}
               </Typography>
-            <Grid item>
+            {/* <Grid item>
               <Button className={classes.button} raised color="accent" onClick={() => deleteClick()}>
                 Delete
                 <CloseIcon className={classes.rightIcon} />
               </Button>
-            </Grid>
+            </Grid> */}
             </Grid>
           </Grid>
         </CardContent>

@@ -6,6 +6,7 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import CheckIcon from 'material-ui-icons/Check';
 import CloseIcon from 'material-ui-icons/Close';
+import MoreIcon from 'material-ui-icons/MoreHoriz';
 import Typography from 'material-ui/Typography';
 import green from 'material-ui/colors/green';
 import red from 'material-ui/colors/red';
@@ -18,12 +19,12 @@ const styles = theme => ({
   greenAvatar: {
     margin: 10,
     color: '#fff',
-    backgroundColor: green[500],
+    backgroundColor: green[400],
   },
   redAvatar: {
     margin: 10,
     color: '#fff',
-    backgroundColor: red[500],
+    backgroundColor: red[400],
   },
   card: {
     // opacity: '.65',
@@ -34,7 +35,8 @@ const styles = theme => ({
     backgroundColor: '#5C6BC0',
   },
   title: {
-    color: 'white',
+    // marginRight: '8px',
+    color: '#ffffff',
   },
   pos: {
     marginBottom: 12,
@@ -67,8 +69,17 @@ function CheckinComplete(props) {
     <Grid item style={{paddingTop: '16px', paddingLeft: '16px' }} xs={12} sm={12} md={6}>
       <Card className={classes.card}>
         
-        <CardHeader title={props.description} avatar={avatar} classes={{title: classes.title}} className={classes.cardHeader} />
-                  
+        {/* <CardHeader title={props.description} avatar={avatar} classes={{title: classes.title}} className={classes.cardHeader} /> */}
+        <CardContent className={classes.cardHeader}>
+          <Grid container spacing="16" alignItems='center' justify="flex-start">
+            {avatar}
+            <Grid item>
+              <Typography className={classes.title} type="headline" component="h2">
+                {props.description}
+              </Typography>
+            </Grid>
+          </Grid>
+        </CardContent>                  
         <CardContent>
           <Grid container spacing="16" justify="space-between">
             <Grid item xs="3">
@@ -87,6 +98,13 @@ function CheckinComplete(props) {
               <LinearProgress mode="determinate" value={progress} />
             </Grid>
           </Grid>
+          {/* <Grid container spacing="0" align-items="center" justify="flex-end">
+            <Grid item >
+              <IconButton color="default" className={classes.button}>
+                <MoreIcon />
+              </IconButton>
+            </Grid>
+          </Grid> */}
         </CardContent>
 
       </Card>
