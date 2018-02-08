@@ -42,8 +42,9 @@ const PropsRoute = ({ component, ...rest }) => {
 //begin root component definiton
 class App extends Component {
   state = {
-    dialogOpen: false,
-    userId: '5a1f16bae5ece1c4dc4de68e',
+    dialogOpen: true,
+    // userId: '5a1f16bae5ece1c4dc4de68e',
+    userId: '',
     date: moment.utc().startOf('day').toString(),
   };
 
