@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import './App.css';  
-
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 // import Divider from 'material-ui/Divider';
