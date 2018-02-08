@@ -42,7 +42,7 @@ const PropsRoute = ({ component, ...rest }) => {
 //begin root component definiton
 class App extends Component {
   state = {
-    dialogOpen: true,
+    dialogOpen: false,
     userId: '5a1f16bae5ece1c4dc4de68e',
     date: moment.utc().startOf('day').toString(),
   };
@@ -74,8 +74,8 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <AppDrawer />
           <Switch>
-          <PropsRoute path='/habits' component={TopBar} date={null} incDate={this.incDate} decDate={this.decDate}/>
-          <PropsRoute path='/' component={TopBar} date={this.state.date} incDate={this.incDate} decDate={this.decDate}/>
+            <PropsRoute path='/habits' component={TopBar} date={null} incDate={this.incDate} decDate={this.decDate}/>
+            <PropsRoute path='/' component={TopBar} date={this.state.date} incDate={this.incDate} decDate={this.decDate}/>
           </Switch>
           <Switch>          
             <PropsRoute path='/habits' component={HabitPage} userId={this.state.userId} />

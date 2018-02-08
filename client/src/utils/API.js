@@ -33,5 +33,4 @@ export default {
   resetChain: function(habitId, currentChain){
     return axios.put(`/api/habit/${habitId}`, {currentChain: 0});
   }
-
 };
