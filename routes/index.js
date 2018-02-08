@@ -14,7 +14,7 @@ router.use("/api", apiRoutes);
 // If no API routes are hit, send the React app
 
 router.use(function(req, res) {
-  console.log('ding');
+  console.log('Express loading default page...');
   // res.sendFile(path.join(__dirname, "../client/build/index.html"));
   res.sendFile(path.join(__dirname, "../views/login.html"));
 });
