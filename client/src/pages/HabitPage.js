@@ -18,7 +18,7 @@ import Tooltip from 'material-ui/Tooltip';
 import Dialog from 'material-ui/Dialog';
 
 //temporary constant user
-const userId = 'a1f16bae5ece1c4dc4de68e'
+const userId = '5a1f16bae5ece1c4dc4de68e'
 const styles = theme => ({
     pageFrame: {
         // position: 'absolute',
@@ -36,7 +36,7 @@ const styles = theme => ({
 class HabitPage extends Component {
   state = {
     // userId: this.props.userId,
-    userId: 'a1f16bae5ece1c4dc4de68e',
+    userId: '5a1f16bae5ece1c4dc4de68e',
     habits: [],
     date: moment.utc().startOf('day').toString(),
     dialogOpen: false,
