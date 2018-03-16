@@ -7,7 +7,6 @@ const authRoutes = require("./auth");
 router.use("/user", userRoutes);
 router.use("/habit", habitRoutes);
 router.use("/checkin", checkinRoutes);
-
-// router.use("/auth", authRoutes);
+router.use("/auth", authRoutes);
 
 module.exports = router;

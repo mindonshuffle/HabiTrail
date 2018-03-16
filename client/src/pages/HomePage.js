@@ -1,23 +1,17 @@
 
 import React, { Component } from 'react';
 import moment from 'moment';
-// import './App.css';
 import API from '../utils/API.js';
 import { withStyles } from 'material-ui/styles';
 
 import Grid from 'material-ui/Grid';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
-// import TopBar from '../components/TopBar/TopBar.js';
 import CheckinIncomplete from '../components/CheckinIncomplete/CheckinIncomplete.js';
 import CheckinComplete from '../components/CheckinComplete/CheckinComplete.js';
 
-//temporary constant user
-// const userId = 'a1f16bae5ece1c4dc4de68e'
-
 const styles = theme => ({
   pageFrame: {
-    // backgroundColor: 'black',
       marginLeft: '241px',
       marginTop: '0',
       width: `calc(100% - 255px)`,
@@ -47,30 +41,41 @@ class HomePage extends Component {
 
   componentDidMount() {
     console.log('didMount date: ', this.state.date);
-    this.loadCheckins(this.state.date);
+    this.loadCheckins(this.state.date, this.state.userId);
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('Did receive:', this.props.date);
-    // let newDate = moment.utc(this.props.date).format('YYYYMMDD').toString();
-    // console.log('newDate: ', newDate);
-    // this.setState({date: newDate});
-    // console.log('loadCheckins date: ', this.state.date);
     if(this.props !== nextProps){
+      console.log('nextprops: ', nextProps.userId)
       let newDate = moment.utc(nextProps.date).format('YYYYMMDD').toString();
       this.setState({
         date: newDate,
-      })
-      this.loadCheckins(newDate);
+        userId: nextProps.userId,
+      });
+      this.loadCheckins(newDate, nextProps.userId);
     }
   }
 
+  // shouldComponentUpdate(nextProps, nextState){
+  //   console.log(this.state, nextState)
+  //   if( this.state.userId !== nextState.userId || this.state.date !== nextState.date ){
+ 
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
+  // componentDidUpdate() {
+  //   console.log('updated userId: ', this.state.userId)
+  //   this.loadCheckins(this.state.date, this.state.userId);
+  // }
+
 // retrieve all checkins for user with current date and sort into state arrays
-  loadCheckins = (newDate) => {
+  loadCheckins = (newDate, newId) => {
     console.log('Load checkins (current): ',newDate)
     console.log('Load checkins (fromState): ',this.state.date)
-    console.log('Load checking userId: ', this.state.userId)
-    API.getCheckins(this.state.userId, typeof newDate === 'string' ? newDate : this.state.date )
+    console.log('Load userId: ', newId)
+    API.getCheckins(newId, typeof newDate === 'string' ? newDate : this.state.date )
     .then(res => {
       this.setState({pendingCheckins: [], completedCheckins: []});
       res.data.forEach( checkin =>{

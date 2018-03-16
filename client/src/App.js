@@ -10,6 +10,7 @@ import HabitPage from './pages/HabitPage.js';
 import AppDrawer from './components/AppDrawer/AppDrawer.js';
 import LoginDialog from './components/LoginDialog/LoginDialog.js';
 import moment from 'moment';
+import API from './utils/API.js';
 import Dialog from 'material-ui/Dialog';
 
 const theme = createMuiTheme();
@@ -43,10 +44,18 @@ const PropsRoute = ({ component, ...rest }) => {
 class App extends Component {
   state = {
     dialogOpen: true,
-    // userId: '5a1f16bae5ece1c4dc4de68e',
-    userId: '',
+    userId: '5a1f16bae5ece1c4dc4de68e',
+    // userId: '',
+    userEmail: '',
     date: moment.utc().startOf('day').toString(),
   };
+
+  // Lifecycles
+
+  componentWillMount(){ 
+    console.log('***component will mount***');
+    this.checkLoginStatus();
+  }  
 
   incDate = () => {
     let newDate = moment.utc(this.state.date).add(1, 'days').startOf('day').toString();
@@ -58,15 +67,49 @@ class App extends Component {
     this.setState({date: newDate});    
   };
 
+  //opens login/registration modal
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
+  //closes login/registration modal
   handleRequestClose = () => {
     if(this.state.userId !== ''){
       this.setState({ dialogOpen: false });
     }
   };
+
+  // Check Login/Session
+  checkLoginStatus = () => {
+    console.log('**checking login:')
+    API.getCurrentUserId()
+    .then(res => 
+      {console.log('**response: ', res.data._id); 
+      this.setState({userEmail: res.data.email, userId: res.data._id})})
+    .catch(err => this.setState({userEmail: null, userId: ''}) )  
+  };
+
+  // Handle New User Registration
+  handleRegisterSubmit = event => {
+    event.preventDefault();
+    API.signUp({username: this.state.registerName, email:this.state.registerEmail,  password: this.state.registerPassword})
+    .then(res => {this.setState({userEmail: res.data.email, userId: res.data._id})})
+  }
+
+  // Handle Login
+  handleLoginSubmit = event => {
+    event.preventDefault();
+
+    API.login({username: this.state.loginEmail, password: this.state.loginPassword})
+    .then( res => {this.setState({userEmail : res.data.email, userId: res.data._id})
+    console.log(this.state)})
+  }
+
+  handleLogoutSubmit = event => {
+    API.logout()
+    .then(res => {this.setState({userEmail : res.data.email, userId: res.data._id})
+    })
+  }
 
   render() {
 
