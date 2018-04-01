@@ -66,45 +66,43 @@ passport.use('local-signup', new LocalStrategy(
                 }
             });
             }
-    }); 
+        }); 
     }));
   
 //LOCAL SIGNIN
 passport.use('local-login', new LocalStrategy(
-{
-    usernameField : 'email',
-    passwordField : 'password',
-    passReqToCallback : true // allows us to pass back the entire request to the callback
-},
+    {
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
 
-function(req, email, password, done) {
-  var User = user;
-
-  var isValidPassword = function(userpass,password){
-    return bCrypt.compareSync(password, userpass);
-  }
-
-  User.findOne({email: email}).then(function (user) {
-    console.log(user)
-    if (!user) {
-      return done(null, false, { message: 'Email does not exist' });
+    function(req, email, password, done) {
+        var User = user;
+        var isValidPassword = function(userpass,password){
+        return bCrypt.compareSync(password, userpass);
     }
 
-    if (!isValidPassword(user.password,password)) {
-      return done(null, false, { message: 'Incorrect password.' });
+    User.findOne({email: email}).then(function (user) {
+        if (!user) {
+            console.log(email, "User does not exist");
+            return done(null, false, { message: 'Email does not exist' });
+        }
+
+        if (!isValidPassword(user.password,password)) {
+            console.log(user, "Incorrect Password");
+            return done(null, false, { message: 'Incorrect password.' });
+        }
+
+        var userinfo = user;
+        console.log(user);
+        return done(null,userinfo);
+
+    }).catch(function(err){
+            console.log("Error:",err);
+            return done(null, false, { message: 'Something went wrong with your Signin' });
+        });
     }
-
-    var userinfo = user.get();
-
-    return done(null,userinfo);
-
-  }).catch(function(err){
-
-    console.log("Error:",err);
-
-    return done(null, false, { message: 'Something went wrong with your Signin' });
-  });
-}
 ));
 
 }

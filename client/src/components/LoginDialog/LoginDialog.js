@@ -32,7 +32,7 @@ export default class LoginDialog extends React.Component {
   handleSubmit = () =>{
     // console.log(this.state);
     console.log(this.state);
-    API.login(this.state.userId, this.state.password);
+    API.login(this.state.email, this.state.password);
     // this.props.handleRequestClose();
   }
 
