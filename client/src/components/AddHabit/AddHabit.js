@@ -76,14 +76,6 @@ class AddHabit extends React.Component {
                 
               </Grid>
               <Grid item xs="12">
-                  {/* <TextField
-                      label="Goal"
-                      value={this.state.goal} 
-                      onChange={this.handleChange('goal')} 
-                      type="number" 
-                      className={classes.textField}
-                      margin="normal"
-                  /> */}
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="goal">
                       Goal

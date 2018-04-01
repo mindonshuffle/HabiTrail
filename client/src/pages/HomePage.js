@@ -75,7 +75,8 @@ class HomePage extends Component {
     console.log('Load checkins (current): ',newDate)
     console.log('Load checkins (fromState): ',this.state.date)
     console.log('Load userId: ', newId)
-    API.getCheckins(newId, typeof newDate === 'string' ? newDate : this.state.date )
+    //API.getCheckins(newId, typeof newDate === 'string' ? newDate : this.state.date )
+    API.getCheckins('5a1f16bae5ece1c4dc4de68e', typeof newDate === 'string' ? newDate : this.state.date )
     .then(res => {
       this.setState({pendingCheckins: [], completedCheckins: []});
       res.data.forEach( checkin =>{

@@ -105,10 +105,6 @@ class HabitPage extends Component {
               })
             }      
             
-            {/* <AddHabit 
-              userId={this.state.userId}
-              loadHabits={this.loadHabits}
-            /> */}
           </Grid>  
           <Tooltip id="tooltip-top" title="Add Habit" placement="top">  
             <Button onClick={this.handleClickOpen} fab color="primary" aria-label="add" className={classes.fab}>

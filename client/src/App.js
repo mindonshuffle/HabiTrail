@@ -55,7 +55,7 @@ class App extends Component {
   componentWillMount(){ 
     console.log('***component will mount***');
     this.checkLoginStatus();
-  }  
+  } 
 
   incDate = () => {
     let newDate = moment.utc(this.state.date).add(1, 'days').startOf('day').toString();
