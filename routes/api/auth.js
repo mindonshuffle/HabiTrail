@@ -7,7 +7,7 @@ router.route("/sessionId")
 
     // Matches with "/login"
 router.route("/login")
-    .get(authController.sessionId);
+    .post(authController.login);
 
 // Matches with "/logout"
 router.route("/logout")

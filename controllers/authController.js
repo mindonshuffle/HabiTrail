@@ -30,5 +30,9 @@ module.exports = {
     //console.log the id of the user
     // console.log(sessionUser.passport.user, " ======user id number=====");
   },
+
+  login: function (req, res){
+    console.log(req.body);
+  }
   
 };
