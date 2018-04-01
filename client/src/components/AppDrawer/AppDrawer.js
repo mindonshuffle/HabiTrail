@@ -88,7 +88,7 @@ class AppDrawer extends React.Component {
         <Grid item xs={12}> */}
         <div style={{position: 'absolute', bottom: '0', width: '240px'}}>
             <Divider />
-            <ListItem button onClick={this.homeClick}>
+            <ListItem button onClick={this.props.handleLogoutSubmit}>
               <ListItemIcon>
                 <AccountCircleIcon />
               </ListItemIcon>

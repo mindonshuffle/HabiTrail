@@ -39,11 +39,13 @@ export default {
   getCurrentUserId: function(){
     return axios.get('/api/auth/userId');
   },
-
   login: function(userId, password){
     return axios.post('api/auth/login', {
       email: userId,
       password: password,
     });  
+  },
+  logout: function(){
+    return axios.post('api/auth/logout', {});
   }
 };

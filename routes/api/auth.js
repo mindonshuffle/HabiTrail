@@ -14,7 +14,7 @@ router.route("/signup")
 
 // Matches with "/logout"
 router.route("/logout")
-    .get(authController.logout);
+    .post(authController.logout);
 
 // // // Matches with "/api/user/:id"
 // router.route("/:id")

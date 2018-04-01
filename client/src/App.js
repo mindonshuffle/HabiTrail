@@ -80,13 +80,12 @@ class App extends Component {
 
   // Check Login/Session
   checkLoginStatus = () => {
-    console.log('**checking login:');
-
     API.getCurrentUserId()
-      .then(res => 
-        {console.log('App.js response: ', res.data); 
-        this.setState({userId: res.data.user})})
-      .catch(err => this.setState({userEmail: null, userId: ''}));  
+      .then(res => {
+        console.log('App.js checking user: ', res.data); 
+        this.setState({userId: res.data.user})
+      })
+      .catch(err => this.setState({userEmail: '', userId: ''}));  
   };
 
   // Handle New User Registration
@@ -107,7 +106,9 @@ class App extends Component {
 
   handleLogoutSubmit = event => {
     API.logout()
-    .then(res => {this.setState({userEmail : res.data.email, userId: res.data._id})
+    .then(res => {
+      this.setState({userEmail : '', userId: '', dialogOpen: true})
+      console.log('App.js Logout: ', this.state)
     })
   }
 
@@ -116,7 +117,7 @@ class App extends Component {
     return (
       <Router>
         <MuiThemeProvider theme={theme}>
-          <AppDrawer />
+          <AppDrawer handleLogoutSubmit={this.handleLogoutSubmit} />
           <Switch>
             <PropsRoute path='/habits' component={TopBar} date={null} incDate={this.incDate} decDate={this.decDate}/>
             <PropsRoute path='/' component={TopBar} date={this.state.date} incDate={this.incDate} decDate={this.decDate}/>
