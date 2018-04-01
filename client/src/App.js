@@ -44,8 +44,7 @@ const PropsRoute = ({ component, ...rest }) => {
 class App extends Component {
   state = {
     dialogOpen: true,
-    userId: '5a1f16bae5ece1c4dc4de68e',
-    // userId: '',
+    userId: '',
     userEmail: '',
     date: moment.utc().startOf('day').toString(),
   };
@@ -81,12 +80,13 @@ class App extends Component {
 
   // Check Login/Session
   checkLoginStatus = () => {
-    console.log('**checking login:')
+    console.log('**checking login:');
+
     API.getCurrentUserId()
-    .then(res => 
-      {console.log('**response: ', res.data._id); 
-      this.setState({userEmail: res.data.email, userId: res.data._id})})
-    .catch(err => this.setState({userEmail: null, userId: ''}) )  
+      .then(res => 
+        {console.log('App.js response: ', res.data); 
+        this.setState({userId: res.data.user})})
+      .catch(err => this.setState({userEmail: null, userId: ''}));  
   };
 
   // Handle New User Registration
@@ -129,6 +129,7 @@ class App extends Component {
             <LoginDialog 
               userId={this.state.userId} 
               handleRequestClose={this.handleRequestClose}
+              checkLoginStatus={this.checkLoginStatus}
             />
           </Dialog>                
         </ MuiThemeProvider>
