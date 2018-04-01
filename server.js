@@ -5,7 +5,8 @@ const routes = require("./routes");
 const bodyParser = require("body-parser");
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session')
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 // requires the model with Passport-Local Mongoose plugged in
 const User = require('./models/user');
@@ -26,8 +27,9 @@ app.use(bodyParser.json());
 // app.use(express.cookieParser());
 
 // For Passport
+app.use(cookieParser());
 require('./config/passport/passport.js')(passport,User);
-app.use(session({ secret: 'learn every day',resave: true, saveUninitialized:true})); // session secret
+app.use(session({ secret: 'madsesh',resave: true, saveUninitialized:true})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 

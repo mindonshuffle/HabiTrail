@@ -37,13 +37,7 @@ export default {
   },
   // login / registration
   getCurrentUserId: function(){
-    console.log('**Axios get:');
-    return axios.get('/api/auth/sessionId');
-    
-    // return axios({
-    //   method: 'get',
-    //   url: '/api/auth/sessionId',
-    // })
+    return axios.get('/api/auth/userId');
   },
 
   login: function(userId, password){
@@ -52,5 +46,4 @@ export default {
       password: password,
     });  
   }
-
 };
