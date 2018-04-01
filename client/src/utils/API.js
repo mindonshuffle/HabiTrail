@@ -48,7 +48,7 @@ export default {
 
   login: function(userId, password){
     return axios.post('api/auth/login', {
-      userId: userId,
+      email: userId,
       password: password,
     });  
   }

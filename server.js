@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 // app.use(express.cookieParser());
 
 // For Passport
+require('./config/passport/passport.js')(passport,User);
 app.use(session({ secret: 'learn every day',resave: true, saveUninitialized:true})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
