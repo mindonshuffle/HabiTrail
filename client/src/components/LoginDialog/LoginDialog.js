@@ -18,8 +18,11 @@ import moment from 'moment';
 
 export default class LoginDialog extends React.Component {
   state = {
+    currentDisplay: 'login',
     email: '',
     password: '',
+    newEmail: '',
+    newPassword: '',
   };
 
   handleChange = name => event => {
@@ -28,15 +31,29 @@ export default class LoginDialog extends React.Component {
     });
   };
 
-  handleSubmit = () =>{
+  handleLoginSubmit = () =>{
     API.login(this.state.email, this.state.password);
     this.props.checkLoginStatus();
     this.props.handleRequestClose();
-    // API.getCurrentUserId()
-    //   .then( res => {
-    //     console.log('API Response: ', res.data);
+  }
 
-    //   });
+  handleSignupSubmit = () =>{
+    API.signup(this.state.newEmail, this.state.newPassword);
+    this.props.checkLoginStatus();
+    this.props.handleRequestClose();
+  }
+
+  handleSignupClick = () =>{
+    this.setState({currentDisplay: "signup"});
+  }
+
+  componentWillUpdate = () =>{
+    switch(this.state.currentDisplay){
+      case 'login':
+        break;
+      case 'signup':
+        break;
+    }
   }
 
   render() {
@@ -53,6 +70,7 @@ export default class LoginDialog extends React.Component {
               </Grid>
             </Grid>
           </CardContent>
+          {/* Start Login Card */}
           <CardContent>
             <Grid container spacing="16" justify="center">
               <Grid item xs="8">
@@ -82,9 +100,66 @@ export default class LoginDialog extends React.Component {
               <Grid item xs="8">
                 <Grid container justify="flex-end">
                   <Grid item>
-                    <Button raised color="contrast" style={{backgroundColor: '#5C6BC0'}} onClick={() => this.handleSubmit()}>
-                      Submit
+                    <Button raised color="contrast" style={{backgroundColor: '#5C6BC0'}} onClick={() => this.handleLoginSubmit()}>
+                      Sign In
                     </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs="8">
+                <Grid container justify="center">
+                  <Grid item>
+                   <Button color="primary" onClick={() => this.handleSignupClick()}>
+                    New User? Sign Up
+                  </Button> 
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </CardContent>
+
+        {/* Start Signup Card */}
+          <CardContent>
+            <Grid container spacing="16" justify="center">
+              <Grid item xs="8">
+                <TextField
+                  // autoFocus
+                  margin="dense"
+                  id="newEmail"
+                  label="Email Address"
+                  type="text"
+                  value={this.state.newEmail}
+                  onChange={this.handleChange('newEmail')}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs="8">
+                <TextField
+                  // autoFocus
+                  margin="dense"
+                  id="newPassword"
+                  label="Password"
+                  type="password"
+                  value={this.state.newPassword}
+                  onChange={this.handleChange('newPassword')}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs="8">
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Button raised color="contrast" style={{backgroundColor: '#5C6BC0'}} onClick={() => this.handleSignupSubmit()}>
+                      Sign In
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs="8">
+                <Grid container justify="center">
+                  <Grid item>
+                   <Button color="primary" onClick={() => this.handleLoginClick()}>
+                    Already have an account? Sign In
+                  </Button> 
                   </Grid>
                 </Grid>
               </Grid>

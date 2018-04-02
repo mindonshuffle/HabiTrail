@@ -7,7 +7,7 @@ module.exports = {
       res.redirect('/');
     }
     else{
-      console.log('authController: ', req.session.passport);
+      // console.log('authController: ', req.session.passport);
       res.json(req.session.passport);
     }
   },

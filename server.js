@@ -23,16 +23,12 @@ if (process.env.NODE_ENV === "production") {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// *** *** *** ALERT: CookieParser may cause errors *** verify
-// app.use(express.cookieParser());
-
-// For Passport
+// Configure Passport and create session
 app.use(cookieParser());
 require('./config/passport/passport.js')(passport,User);
-app.use(session({ secret: 'madsesh',resave: true, saveUninitialized:true})); // session secret
+app.use(session({ secret: 'its my birthday',resave: true, saveUninitialized:true}));
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-
+app.use(passport.session()); 
 
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
@@ -48,6 +44,7 @@ mongoose.connect(
 // use Express Router routes
 app.use(routes);
 
+// Start server on dynamic port
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

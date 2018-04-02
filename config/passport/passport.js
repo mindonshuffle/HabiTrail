@@ -10,7 +10,6 @@ var LocalStrategy = require('passport-local').Strategy;
 //creates a cookie for the user sessions
 passport.serializeUser(
     function(user, done) {
-        console.log('Serialize: ', user.id);
         done(null, user.id);
     }
 );
@@ -19,7 +18,6 @@ passport.serializeUser(
 //reads the cookie
 passport.deserializeUser(function(id, done) {
     User.findById(id).then(function(user) {
-      console.log('Deserialize: ', user);
       if(user){
         done(null, user);
       }

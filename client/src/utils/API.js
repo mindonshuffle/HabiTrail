@@ -47,5 +47,11 @@ export default {
   },
   logout: function(){
     return axios.post('api/auth/logout', {});
-  }
+  },
+  signup: function(userId, password){
+    return axios.post('api/auth/signup', {
+      email: userId,
+      password: password,
+    });  
+  },
 };
