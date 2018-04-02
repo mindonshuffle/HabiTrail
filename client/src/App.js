@@ -56,6 +56,10 @@ class App extends Component {
     this.checkLoginStatus();
   } 
 
+  componentWillUpdate(){
+    console.log('***app.js WILL UPDATE ***', this.state)
+  }
+
   incDate = () => {
     let newDate = moment.utc(this.state.date).add(1, 'days').startOf('day').toString();
     this.setState({date: newDate});
@@ -82,7 +86,7 @@ class App extends Component {
   checkLoginStatus = () => {
     API.getCurrentUserId()
       .then(res => {
-        console.log('App.js checking user: ', res.data); 
+        console.log('App.js checking user: ', res.data.user); 
         this.setState({userId: res.data.user})
       })
       .catch(err => this.setState({userEmail: '', userId: ''}));  

@@ -18,7 +18,6 @@ import moment from 'moment';
 
 export default class LoginDialog extends React.Component {
   state = {
-    userId: this.props.userId,
     email: '',
     password: '',
   };
@@ -30,15 +29,14 @@ export default class LoginDialog extends React.Component {
   };
 
   handleSubmit = () =>{
-    console.log(this.state);
     API.login(this.state.email, this.state.password);
     this.props.checkLoginStatus();
+    this.props.handleRequestClose();
     // API.getCurrentUserId()
     //   .then( res => {
     //     console.log('API Response: ', res.data);
 
     //   });
-    // this.props.handleRequestClose();
   }
 
   render() {
