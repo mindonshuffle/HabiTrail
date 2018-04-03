@@ -27,7 +27,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findCheckinsByDate: function(req, res) {
-    
     findDate = moment(req.params.date, 'YYYYMMDD').startOf('day').toDate();
     db.Checkin
       .find({ userId: req.params.id , date: findDate })

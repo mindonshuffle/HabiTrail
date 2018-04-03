@@ -43,10 +43,8 @@ const styles = theme => ({
 class AppDrawer extends React.Component {
  
   homeClick = () => {
-    console.log('Ding!');
   };
   habitClick = () => {
-    console.log('Dong!');
   };
 
   render() {
@@ -64,9 +62,6 @@ class AppDrawer extends React.Component {
         <div className={classes.drawerHeader}>
         </div>
         <Divider />
-
-        {/* <Grid container direction="column" justify="spaceBetween"> */}
-        {/* <Grid item xs={12}> */}
           <Link style={{ textDecoration: 'none' }} to="/">
             <ListItem button onClick={this.homeClick}>
               <ListItemIcon>
@@ -83,9 +78,7 @@ class AppDrawer extends React.Component {
               <ListItemText primary="Habits" />
             </ListItem>
           </Link>
-          
-        {/* </Grid>
-        <Grid item xs={12}> */}
+
         <div style={{position: 'absolute', bottom: '0', width: '240px'}}>
             <Divider />
             <ListItem button onClick={this.props.handleLogoutSubmit}>
@@ -95,8 +88,6 @@ class AppDrawer extends React.Component {
               <ListItemText primary="Logout" />
             </ListItem>
         </div>
-          {/* </Grid> */}
-        {/* </Grid> */}
       </Drawer>
     );
   }

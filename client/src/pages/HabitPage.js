@@ -35,7 +35,6 @@ const styles = theme => ({
 
 class HabitPage extends Component {
   state = {
-    // userId: this.props.userId,
     userId: this.props.userId,
     habits: [],
     date: moment.utc().startOf('day').toString(),
