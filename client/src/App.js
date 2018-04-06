@@ -77,7 +77,7 @@ class App extends Component {
 
   //closes login/registration modal
   handleRequestClose = () => {
-    if(this.state.userId !== ''){
+    if(this.state.userId !== '' && this.state.userId !== undefined){
       this.setState({ dialogOpen: false });
     }
   };
@@ -109,9 +109,9 @@ class App extends Component {
   }
 
   handleLogoutSubmit = event => {
+    this.setState({userEmail : '', userId: '', dialogOpen: true})
     API.logout()
     .then(res => {
-      this.setState({userEmail : '', userId: '', dialogOpen: true})
       console.log('App.js Logout: ', this.state)
     })
   }
